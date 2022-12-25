@@ -37,7 +37,7 @@ class ComicController {
       });
       await comics.addGenres(genres);
       console.log(comics);
-      res.json(comics);
+      res.redirect("/comics");
     } catch (error) {
       res.json(error);
     }
