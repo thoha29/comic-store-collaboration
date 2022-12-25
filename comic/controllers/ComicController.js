@@ -16,9 +16,9 @@ class ComicController {
   static async createComic(req, res) {
     try {
       const { name, image, creator, price, stock } = req.body;
-      let genres = await genre.findAll();
+
       let result = await comic.create({ name, image, creator, price, stock });
-      await result.addGenres(genres);
+
       res.redirect("/comics");
     } catch (error) {
       res.json(error);
