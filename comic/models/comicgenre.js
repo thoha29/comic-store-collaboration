@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   comicgenre.init(
     {
-      comicid: DataTypes.INTEGER,
-      genreid: DataTypes.INTEGER,
+      comicId: DataTypes.INTEGER,
+      genreId: DataTypes.INTEGER,
     },
     {
       sequelize,

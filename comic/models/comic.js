@@ -9,7 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      comic.belongsToMany(models.genre, { through: "comicgenre" });
+      comic.belongsToMany(models.genre, {
+        through: "comicgenre",
+        as: "genres",
+        foreignKey: "comicId",
+      });
     }
   }
   comic.init(
