@@ -12,6 +12,17 @@ class CGController {
       res.json(error);
     }
   }
+  static async getAll(req, res) {
+    try {
+      let id = +req.params.id;
+      let comicG = await comicgenre.findOne({
+        where: { comicId: id, genreId: id },
+      });
+      res.json(comicG);
+    } catch (error) {
+      res.json(error);
+    }
+  }
   static async create(req, res) {
     try {
       const { comicId, genreId } = req.body;

@@ -4,9 +4,9 @@ class ComicController {
   static async getComic(req, res) {
     try {
       let comics = await comic.findAll({
-        inlcude: [{ model: genre, through: "comicgenre" }],
-        order: [["id", "asc"]],
+        include: [{ model: genre, attributes: ["name"] }],
       });
+
       res.render("./comics/comics_index.ejs", { comics });
     } catch (error) {
       res.json(error);
@@ -20,6 +20,24 @@ class ComicController {
       let result = await comic.create({ name, image, creator, price, stock });
 
       res.redirect("/comics");
+    } catch (error) {
+      res.json(error);
+    }
+  }
+  static async createComicWithGenre(req, res) {
+    try {
+      const { name, image, creator, price, stock, genres } = req.body;
+
+      let comics = await comic.create({
+        name,
+        image,
+        creator,
+        price,
+        stock,
+      });
+      await comics.addGenres(genres);
+      console.log(comics);
+      res.json(comics);
     } catch (error) {
       res.json(error);
     }

@@ -72,6 +72,7 @@
                             <th scope="col">Creator</th>
                             <th scope="col">Price</th>
                             <th scope="col">Stock</th>
+                            <th scope="col">Genre</th>
                         
                             <th scope="col">Action</th>
                         </tr>
@@ -94,6 +95,9 @@
                                 </td>
                                 <td class="text-center">
                                     <%= comic.stock %>
+                                </td>
+                                <td class="text-center">
+                                    <%= comic.genres[0].name%>
                                 </td>
                             
                                 <td class="text-center">
