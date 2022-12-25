@@ -1,5 +1,4 @@
 const { Router } = require("express");
-
 const komikgenreRoute = Router();
 const CGController = require("../controllers/CGController");
 

@@ -18,11 +18,39 @@ module.exports = (sequelize, DataTypes) => {
   }
   comic.init(
     {
-      name: DataTypes.STRING,
+      name: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: {
+            message: "Name can not be empty",
+          },
+        },
+      },
       image: DataTypes.STRING,
-      creator: DataTypes.STRING,
-      price: DataTypes.INTEGER,
-      stock: DataTypes.INTEGER,
+      creator: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: {
+            message: "Creator can not be empty",
+          },
+        },
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        validate: {
+          notEmpty: {
+            message: "Price can not be empty",
+          },
+        },
+      },
+      stock: {
+        type: DataTypes.INTEGER,
+        validate: {
+          notEmpty: {
+            message: "Stock can not be empty",
+          },
+        },
+      },
     },
     {
       sequelize,

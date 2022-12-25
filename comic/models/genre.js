@@ -18,7 +18,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   genre.init(
     {
-      name: DataTypes.STRING,
+      name: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: {
+            message: "Name can not be empty",
+          },
+        },
+      },
     },
     {
       sequelize,

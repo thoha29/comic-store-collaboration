@@ -1,11 +1,19 @@
 const express = require("express");
 const route = express.Router();
 
-komikRoutes = require("./komik");
+route.get("/", (req, res) => {
+  // res.json({
+  //     message: 'Hello, world Fruit Store'
+  // });
+
+  res.render("index.ejs");
+});
+
+comicRoutes = require("./comic");
 genreRoutes = require("./genre");
 komikgenreRoutes = require("./komikgenre");
 
-route.use("/komiks", komikRoutes);
+route.use("/comics", comicRoutes);
 route.use("/genres", genreRoutes);
 route.use("/komikgenres", komikgenreRoutes);
 
