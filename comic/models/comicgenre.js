@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      comicgenre.belongsTo(models.comic);
-      comicgenre.belongsTo(models.genre);
+      // comicgenre.belongsTo(models.comic);
+      // comicgenre.belongsTo(models.genre);
     }
   }
   comicgenre.init(
     {
-      comicid: DataTypes.INTEGER,
-      genreid: DataTypes.INTEGER,
+      comicId: DataTypes.INTEGER,
+      genreId: DataTypes.INTEGER,
     },
     {
       sequelize,

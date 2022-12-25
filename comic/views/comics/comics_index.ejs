@@ -11,6 +11,19 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <style>
+        .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  
+}
+
+    </style>
 </head>
 
 <body>
@@ -53,26 +66,26 @@
                 <table class="table">
                     <thead class="table-success text-center">
                         <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">No</th>
                             <th scope="col">Image</th>
+                            <th scope="col">Name</th>
                             <th scope="col">Creator</th>
                             <th scope="col">Price</th>
                             <th scope="col">Stock</th>
+                            <th scope="col">Genre</th>
+                        
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% comics.forEach(comic=> { %>
+                        <% comics.forEach((comic,i)=> { %>
                             <tr>
                                 <td class="text-center">
-                                    <%= comic.id %>
+                                    <%= ++i %>
                                 </td>
+                                <td><img class="center" src="<%= comic.image%>" alt="" srcset=""></td>  
                                 <td class="text-center">
                                     <%= comic.name %>
-                                </td>
-                                <td class="text-center">
-                                    <%= comic.image %>
                                 </td>
                                 <td class="text-center">
                                     <%= comic.creator %>
@@ -83,6 +96,10 @@
                                 <td class="text-center">
                                     <%= comic.stock %>
                                 </td>
+                                <td class="text-center">
+                                    <%= comic.genres[0].name%>
+                                </td>
+                            
                                 <td class="text-center">
                                     <a href="/comics/edit/<%= comic.id %>" class="btn btn-primary"><i
                                             class="fa-solid fa-file-pen"></i></a>
@@ -100,6 +117,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+
+        
 </body>
 
 </html>

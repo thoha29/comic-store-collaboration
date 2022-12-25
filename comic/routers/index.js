@@ -1,12 +1,12 @@
 const express = require("express");
 const route = express.Router();
 
-route.get('/', (req, res) => {
-    // res.json({
-    //     message: 'Hello, world Fruit Store'
-    // });
+route.get("/", (req, res) => {
+  // res.json({
+  //     message: 'Hello, world Fruit Store'
+  // });
 
-    res.render('index.ejs');
+  res.render("index.ejs");
 });
 
 comicRoutes = require("./comic");

@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      comic.belongsToMany(models.genre, { through: models.comicgenre });
+      comic.belongsToMany(models.genre, {
+        through: "comicgenre",
+      });
     }
   }
   comic.init(
@@ -18,34 +20,34 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         validate: {
           notEmpty: {
-            message: "Name can not be empty"
-          }
-        }
+            message: "Name can not be empty",
+          },
+        },
       },
       image: DataTypes.STRING,
       creator: {
         type: DataTypes.STRING,
         validate: {
           notEmpty: {
-            message: "Creator can not be empty"
-          }
-        }
+            message: "Creator can not be empty",
+          },
+        },
       },
       price: {
         type: DataTypes.INTEGER,
         validate: {
           notEmpty: {
-            message: "Price can not be empty"
-          }
-        }
+            message: "Price can not be empty",
+          },
+        },
       },
       stock: {
         type: DataTypes.INTEGER,
         validate: {
           notEmpty: {
-            message: "Stock can not be empty"
-          }
-        }
+            message: "Stock can not be empty",
+          },
+        },
       },
     },
     {
