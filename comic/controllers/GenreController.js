@@ -36,7 +36,7 @@ class GenreController {
           name,
         },
         {
-          where: { id },
+          where: { id: id },
         }
       );
       res.json(result);
