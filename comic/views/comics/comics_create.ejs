@@ -68,8 +68,16 @@
                 <input type="text" class="form-control" name="stock">
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Stock</label>
-                <input type="text" class="form-control" name="genres">
+                <label for="exampleInputPassword1" class="form-label">Genres</label>
+                <select name="genres" id="">
+                    <option value=""></option>
+                    
+
+                    <% genres.forEach(function(genre) { %>
+                        
+                        <option value="<%= genre.id %>"> <%= genre.name %></option>
+                    <% }); %>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Add Comic</button>
         </form>

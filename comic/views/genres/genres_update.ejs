@@ -44,12 +44,12 @@
             <h3>Genre Update Page</h3>
         </div>
 
-        <form action="/genres/edit/" method="post">
+        <form action="/genres/edit/<%= genre.id%>" method="post">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Name</label>
-                <input type="text" class="form-control" name="name">
+                <input type="text" class="form-control" name="name" id="" value="<%= genre.name%>">
             </div>
-            <button type="submit" class="btn btn-primary">Add Comic</button>
+            <button type="submit" class="btn btn-primary">Edit Genre</button>
         </form>
 
     </div>

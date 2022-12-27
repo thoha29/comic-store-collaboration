@@ -44,18 +44,34 @@ class ComicController {
   }
 
   static async createPage(req, res) {
-    res.render("./comics/comics_create.ejs");
+    try {
+      let genres = await genre.findAll();
+      res.render("./comics/comics_create.ejs", { genres });
+    } catch (error) {
+      res.json(error);
+    }
   }
 
   static async editPage(req, res) {
-    res.render("./comics/comics_update.ejs");
+    try {
+      const id = +req.params.id;
+      let genres = await genre.findAll();
+      let comics = await comic.findAll({ where: { id: id } });
+
+      res.render("./comics/comics_update.ejs", {
+        comic: comics[0],
+        genres,
+      });
+    } catch (error) {
+      res.json(error);
+    }
   }
 
   static async editComic(req, res) {
     try {
       const id = +req.params.id;
-      const { name, image, creator, price, stock } = req.body;
-      let result = await comic.update(
+      const { name, image, creator, price, stock, genres } = req.body;
+      let comics = await comic.update(
         {
           name,
           image,
@@ -67,12 +83,13 @@ class ComicController {
           where: { id },
         }
       );
+      await comics.setGenres(genres);
       res.redirect("/comics");
-      res.json(result);
     } catch (error) {
       res.json(error);
     }
   }
+
   static async deleteComic(req, res) {
     try {
       const id = +req.params.id;

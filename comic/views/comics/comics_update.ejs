@@ -46,28 +46,40 @@
             </div>
         </div>
 
-        <form action="/comics/edit/" method="post">
+        <form action="/comics/edit/<%= comic.id%>" method="post">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Name</label>
-                <input type="text" class="form-control" name="name">
+                <input type="text" class="form-control" name="name" id="" value="<%= comic.name%>">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Image</label>
-                <input type="text" class="form-control" name="image">
+                <input type="text" class="form-control" name="image" id="" value="<%= comic.image%>">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Creator</label>
-                <input type="text" class="form-control" name="creator">
+                <input type="text" class="form-control" name="creator" id="" value="<%= comic.creator%>">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Price</label>
-                <input type="text" class="form-control" name="price">
+                <input type="text" class="form-control" name="price" id="" value="<%= comic.price%>">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Stock</label>
-                <input type="text" class="form-control" name="stock">
+                <input type="text" class="form-control" name="stock" id="" value="<%= comic.stock%>">
             </div>
-            <button type="submit" class="btn btn-primary">Add Comic</button>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Genre</label>
+                <select name="genres" id="">
+                    <option value=""></option>
+                    <% genres.forEach(function(gen) { %>
+                       
+                            <option  value="<%= gen.id %>" > <%= gen.name %> </option>
+                     
+                        
+                    <% }); %>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Edit Comic</button>
         </form>
     </div>
 
