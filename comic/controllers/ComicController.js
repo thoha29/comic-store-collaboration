@@ -35,6 +35,7 @@ class ComicController {
         price,
         stock,
       });
+      //menghubungkan relasi m-m
       await comics.addGenres(genres);
       console.log(comics);
       res.redirect("/comics");

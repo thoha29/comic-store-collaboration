@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      //association relasi M-M
       genre.belongsToMany(models.comic, {
         through: models.comicgenre,
         foreignKey: "genreId",
