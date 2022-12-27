@@ -39,10 +39,9 @@ class CGController {
   static async edit(req, res) {
     try {
       let id = +req.params.id;
-      const comicId = +req.body.comicId;
-      const genreId = +req.body.genreId;
+      const { comicId, genreId } = req.body;
       let result = await comicgenre.update(
-        { comicId, genreId },
+        { comicId: +comicId, genreId: +genreId },
         { where: { id: id } }
       );
       if (result == 1) {

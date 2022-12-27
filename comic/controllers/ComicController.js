@@ -6,7 +6,7 @@ class ComicController {
       let comics = await comic.findAll({
         include: [{ model: genre, attributes: ["name"] }],
       });
-
+      // res.json(comics);
       res.render("./comics/comics_index.ejs", { comics });
     } catch (error) {
       res.json(error);
@@ -26,8 +26,8 @@ class ComicController {
   }
   static async createComicWithGenre(req, res) {
     try {
-      const { name, image, creator, price, stock, genres } = req.body;
-
+      const { name, creator, price, stock, genres } = req.body;
+      const image = req.file.path;
       let comics = await comic.create({
         name,
         image,
@@ -56,8 +56,11 @@ class ComicController {
     try {
       const id = +req.params.id;
       let genres = await genre.findAll();
-      let comics = await comic.findAll({ where: { id: id } });
-
+      let comics = await comic.findAll({
+        where: { id },
+        include: [{ model: genre, attributes: ["id", "name"] }],
+      });
+      console.log(comics[0]);
       res.render("./comics/comics_update.ejs", {
         comic: comics[0],
         genres,
@@ -70,22 +73,28 @@ class ComicController {
   static async editComic(req, res) {
     try {
       const id = +req.params.id;
-      const { name, image, creator, price, stock, genres } = req.body;
-      let comics = await comic.update(
-        {
-          name,
-          image,
-          creator,
-          price,
-          stock,
-        },
-        {
-          where: { id },
-        }
-      );
+      const { name, creator, price, stock, genres } = req.body;
+
+      const updateData = {
+        name,
+        creator,
+        price,
+        stock,
+      };
+      if (req.file) {
+        updateData.image = req.file.path;
+      }
+      console.log("update woyyy", updateData);
+
+      let comics = await comic.findByPk(id);
+
+      await comics.update(updateData);
+      console.log("sebelum", comics);
       await comics.setGenres(genres);
+      console.log("sesudah", comics);
       res.redirect("/comics");
     } catch (error) {
+      console.log(error);
       res.json(error);
     }
   }

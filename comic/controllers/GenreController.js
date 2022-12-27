@@ -15,7 +15,7 @@ class GenreController {
     try {
       const { name } = req.body;
       let result = await genre.create({ name });
-      res.json(result);
+      res.redirect("/genres");
     } catch (error) {
       res.json(error);
     }
