@@ -9,8 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      //association relasi M-M
       comic.belongsToMany(models.genre, {
-        through: "comicgenre",
+        through: models.comicgenre,
+        foreignKey: "comicId",
       });
     }
   }

@@ -15,7 +15,7 @@ class GenreController {
     try {
       const { name } = req.body;
       let result = await genre.create({ name });
-      res.json(result);
+      res.redirect("/genres");
     } catch (error) {
       res.json(error);
     }
@@ -25,7 +25,13 @@ class GenreController {
     res.render("./genres/genres_create.ejs");
   }
   static async editPage(req, res) {
-    res.render("./genres/genres_update.ejs");
+    try {
+      const id = +req.params.id;
+      let genres = await genre.findAll({ where: { id: id } });
+      res.render("./genres/genres_update.ejs", { genre: genres[0] });
+    } catch (error) {
+      res.json(error);
+    }
   }
   static async editGenre(req, res) {
     try {
@@ -36,10 +42,11 @@ class GenreController {
           name,
         },
         {
-          where: { id },
+          where: { id: id },
         }
       );
-      res.json(result);
+      // res.json(result);
+      res.redirect("/genres");
     } catch (error) {
       res.json(error);
     }
