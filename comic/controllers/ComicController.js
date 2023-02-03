@@ -7,26 +7,24 @@ class ComicController {
         include: [{ model: genre, attributes: ["name"] }],
       });
       // res.json(comics);
-      res.render("./comics/comics_index.ejs", { comics });
+      res.status(200).json({ data: comics });
     } catch (error) {
       res.json(error);
     }
   }
 
-  static async createComic(req, res) {
-    try {
-      const { name, image, creator, price, stock } = req.body;
-
-      let result = await comic.create({ name, image, creator, price, stock });
-
-      res.redirect("/comics");
-    } catch (error) {
-      res.json(error);
-    }
-  }
   static async createComicWithGenre(req, res) {
     try {
-      const { name, creator, price, stock, genres } = req.body;
+      const {
+        name,
+        // image,
+        creator,
+        price,
+        stock,
+        genres,
+        rating,
+        description,
+      } = req.body;
       const image = req.file.path;
       let comics = await comic.create({
         name,
@@ -34,11 +32,13 @@ class ComicController {
         creator,
         price,
         stock,
+        rating,
+        description,
       });
       //menghubungkan relasi m-m
       await comics.addGenres(genres);
       console.log(comics);
-      res.redirect("/comics");
+      res.status(200).json({ data: comics });
     } catch (error) {
       res.json(error);
     }
@@ -74,13 +74,25 @@ class ComicController {
   static async editComic(req, res) {
     try {
       const id = +req.params.id;
-      const { name, creator, price, stock, genres } = req.body;
-
-      const updateData = {
+      const {
         name,
+        // image,
         creator,
         price,
         stock,
+        genres,
+        rating,
+        description,
+      } = req.body;
+
+      const updateData = {
+        name,
+        // image,
+        creator,
+        price,
+        stock,
+        rating,
+        description,
       };
       if (req.file) {
         updateData.image = req.file.path;
@@ -93,7 +105,9 @@ class ComicController {
       console.log("sebelum", comics);
       await comics.setGenres(genres);
       console.log("sesudah", comics);
-      res.redirect("/comics");
+      comics === 0
+        ? res.status(200).json({ status: "Success" })
+        : res.status(500).json({ status: "failed" });
     } catch (error) {
       console.log(error);
       res.json(error);

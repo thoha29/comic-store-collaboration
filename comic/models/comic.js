@@ -51,6 +51,22 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      rating: {
+        type: DataTypes.DOUBLE,
+        validate: {
+          notEmpty: {
+            message: "rating can not be empty",
+          },
+        },
+      },
+      description: {
+        type: DataTypes.TEXT,
+        validate: {
+          notEmpty: {
+            message: "description can not be empty",
+          },
+        },
+      },
     },
     {
       sequelize,

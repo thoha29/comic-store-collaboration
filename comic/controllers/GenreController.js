@@ -6,7 +6,7 @@ class GenreController {
       let genres = await genre.findAll({
         order: [["id", "asc"]],
       });
-      res.render("./genres/genres_index.ejs", { genres });
+      res.status(200).json(genres);
     } catch (error) {
       res.json(error);
     }
@@ -15,7 +15,7 @@ class GenreController {
     try {
       const { name } = req.body;
       let result = await genre.create({ name });
-      res.redirect("/genres");
+      res.json(result);
     } catch (error) {
       res.json(error);
     }
