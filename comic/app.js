@@ -5,10 +5,12 @@ const express = require("express");
 const app = express();
 
 const port = process.env.PORT || 3000;
+// const port = 8000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+const cors = require("cors");
+app.use(cors());
 const routes = require("./routers");
 
 app.use(routes);

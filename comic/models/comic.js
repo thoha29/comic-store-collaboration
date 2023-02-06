@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         through: models.comicgenre,
         foreignKey: "comicId",
       });
+      comic.hasMany(models.Cart, { foreignKey: "comicId", as: "comics" });
     }
   }
   comic.init(
