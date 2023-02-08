@@ -2,18 +2,33 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("comicgenres", {
+    await queryInterface.createTable("comics", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      comicid: {
+      name: {
+        type: Sequelize.STRING,
+      },
+      image: {
+        type: Sequelize.STRING,
+      },
+      creator: {
+        type: Sequelize.STRING,
+      },
+      price: {
         type: Sequelize.INTEGER,
       },
-      genreid: {
+      stock: {
         type: Sequelize.INTEGER,
+      },
+      rating: {
+        type: Sequelize.DOUBLE,
+      },
+      description: {
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,
@@ -26,6 +41,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("comicgenres");
+    await queryInterface.dropTable("comics");
   },
 };
