@@ -1,17 +1,19 @@
 const { Transaction } = require("../models");
-
+const { getUserByToken } = require("../helper/auth");
 class TransactionController {
-  static async getTransaction(req, res) {
+  static async create(req, res) {
+    const user = await getUserByToken(req);
     try {
-      const transactions = await Transaction.findAll();
-      res.status(200).json(transactions);
+      const { total } = req.body;
+      const transaction = await Transaction.create({
+        userId: user.id,
+        isPayed: false,
+        total: total,
+      });
+      res.status(200).json(transaction);
     } catch (error) {
       res.status(500).json(error);
     }
-  }
-  static async create(req, res) {
-    try {
-    } catch (error) {}
   }
 }
 
