@@ -32,11 +32,9 @@ class CartController {
   static async remove(req, res) {
     try {
       const id = +req.params.id;
-      const user = await getUserByToken(req);
-      const item = await Cart.findOneAndDelete({
-        id: id,
-        userId: user.id,
-      });
+
+      const item = await Cart.destroy({ where: { id } });
+
       if (item) {
         res
           .status(200)

@@ -118,10 +118,10 @@ class ComicController {
     try {
       const id = +req.params.id;
       let result = await comic.destroy({ where: { id } });
-      res.redirect("/comics");
-      // result === 1
-      //     ? res.json({ message: `id ${id} has been deleted` })
-      //     : res.json({ message: `id ${id} is not found` });
+      // res.redirect("/comics");
+      result === 1
+        ? res.json({ message: `id ${id} has been deleted` })
+        : res.json({ message: `id ${id} is not found` });
     } catch (error) {
       res.json(error);
     }
