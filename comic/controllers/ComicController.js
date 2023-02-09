@@ -44,33 +44,6 @@ class ComicController {
     }
   }
 
-  static async createPage(req, res) {
-    try {
-      let genres = await genre.findAll();
-      res.render("./comics/comics_create.ejs", { genres });
-    } catch (error) {
-      res.json(error);
-    }
-  }
-
-  static async editPage(req, res) {
-    try {
-      const id = +req.params.id;
-      let genres = await genre.findAll();
-      let comics = await comic.findAll({
-        where: { id },
-        include: [{ model: genre, attributes: ["id", "name"] }],
-      });
-      console.log(comics[0]);
-      res.render("./comics/comics_update.ejs", {
-        comic: comics[0],
-        genres,
-      });
-    } catch (error) {
-      res.json(error);
-    }
-  }
-
   static async editComic(req, res) {
     try {
       const id = +req.params.id;
@@ -90,6 +63,7 @@ class ComicController {
         // image,
         creator,
         price,
+        genres,
         stock,
         rating,
         description,
@@ -125,6 +99,17 @@ class ComicController {
     } catch (error) {
       res.json(error);
     }
+  }
+  static async editComicQty(req, res) {
+    try {
+      const id = +req.params.id;
+      const { stock } = req.body;
+      let result = await comic.findByPk(id);
+      await result.update({ stock: stock });
+      result === 1
+        ? res.json({ message: `id ${id} has been updated` })
+        : res.json({ message: `id ${id} is not found` });
+    } catch (error) {}
   }
 }
 
