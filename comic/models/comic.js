@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         through: models.comicgenre,
         foreignKey: "comicId",
       });
+      comic.hasMany(models.Cart, { foreignKey: "comicId", as: "comics" });
     }
   }
   comic.init(
@@ -48,6 +49,22 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: {
             message: "Stock can not be empty",
+          },
+        },
+      },
+      rating: {
+        type: DataTypes.DOUBLE,
+        validate: {
+          notEmpty: {
+            message: "rating can not be empty",
+          },
+        },
+      },
+      description: {
+        type: DataTypes.TEXT,
+        validate: {
+          notEmpty: {
+            message: "description can not be empty",
           },
         },
       },

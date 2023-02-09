@@ -1,4 +1,3 @@
-const e = require("express");
 const { comic, genre, comicgenre } = require("../models");
 class CGController {
   static async getCG(req, res) {

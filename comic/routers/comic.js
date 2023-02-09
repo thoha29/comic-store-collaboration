@@ -6,14 +6,15 @@ const path = require("path");
 const upload = multer({ dest: "uploads/" });
 
 komikRoute.get("/", ComicController.getComic);
-komikRoute.get("/create", ComicController.createPage);
+
 komikRoute.post(
   "/create",
   upload.single("image"),
   ComicController.createComicWithGenre
 );
-komikRoute.get("/edit/:id", ComicController.editPage);
-komikRoute.post("/edit/:id", upload.single("image"), ComicController.editComic);
+
+komikRoute.put("/edit/:id", upload.single("image"), ComicController.editComic);
 komikRoute.get("/remove/:id", ComicController.deleteComic);
+komikRoute.put("/editstock/:id", ComicController.editComicQty);
 
 module.exports = komikRoute;
