@@ -1,5 +1,7 @@
 const { User } = require("../models");
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const { getUserByToken } = require("../helper/auth");
 class UserController {
   static async getUser(req, res) {
     try {
@@ -42,8 +44,8 @@ class UserController {
           error: "User tidak ditemukan",
         });
       }
-      const secret = "secretKey";
-      const token = jwt.sign({ id: user.id }, secret);
+
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
       return res.status(200).json({
         status: true,
@@ -56,13 +58,14 @@ class UserController {
       return res.status(500).json(error);
     }
   }
+
   static async me(req, res) {
     const token = req.headers["authorization"].split(" ")[1];
-    const secret = "secretKey";
     try {
-      const user = jwt.verify(token, secret);
+      const user = jwt.verify(token, process.env.JWT_SECRET);
       if (user) {
-        const dataUser = await User.findOne({ id: user.id });
+        const dataUser = await User.findByPk(user.id);
+        console.log(user.id);
         res.send({
           status: true,
           message: "get user detail success",

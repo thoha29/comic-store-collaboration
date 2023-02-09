@@ -15,6 +15,15 @@ class TransactionController {
       res.status(500).json(error);
     }
   }
+  static async get(req, res) {
+    const user = await getUserByToken(req);
+    try {
+      const result = await Transaction.findAll({ where: { userId: user.id } });
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 }
 
 module.exports = TransactionController;

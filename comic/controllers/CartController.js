@@ -2,8 +2,9 @@ const { Cart, comic } = require("../models");
 const { getUserByToken } = require("../helper/auth");
 class CartController {
   static async getCart(req, res) {
+    const user = await getUserByToken(req);
     try {
-      const user = await getUserByToken(req);
+      console.log(user);
       let result = await Cart.findAll({
         where: { userId: user.id },
         include: [{ model: comic, as: "comics" }],
